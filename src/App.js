@@ -3,17 +3,24 @@ import React from "react";
 import Navbar from "./components/Navbar";
 import CartContainer from "./components/CartContainer";
 // items
-import cartItems from "./cart-items";
+// import cartItems from "./cart-items";
 // redux stuff
+import { Provider } from 'react-redux';
+import {createStore} from 'redux';
+import reducer from './reducers';
+
+const initialStore = {
+  count: 78
+}
+const store = createStore(reducer, initialStore)
 
 function App() {
   // cart setup
-
   return (
-    <main>
+    <Provider store = {store}>
       <Navbar />
-      <CartContainer cart={cartItems} />
-    </main>
+      <CartContainer />
+    </Provider>
   );
 }
 

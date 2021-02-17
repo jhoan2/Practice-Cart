@@ -1,4 +1,6 @@
 import React from "react";
+// import { connect } from 'redux';
+
 const Navbar = () => {
   return (
     <nav>
@@ -16,5 +18,6 @@ const Navbar = () => {
     </nav>
   );
 };
+
 
 export default Navbar;
