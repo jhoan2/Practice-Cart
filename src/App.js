@@ -12,7 +12,7 @@ import cartItems from './cart-items';
 
 const initialStore = {
   cart: cartItems,
-  total: 0,
+  total: 10,
   amount: 5
 }
 const store = createStore(reducer, initialStore)
