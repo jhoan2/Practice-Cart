@@ -8,9 +8,12 @@ import CartContainer from "./components/CartContainer";
 import { Provider } from 'react-redux';
 import {createStore} from 'redux';
 import reducer from './reducers';
+import cartItems from './cart-items';
 
 const initialStore = {
-  count: 78
+  cart: cartItems,
+  total: 0,
+  amount: 5
 }
 const store = createStore(reducer, initialStore)
 
