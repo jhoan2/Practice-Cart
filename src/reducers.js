@@ -31,15 +31,20 @@ function reducer(state, action) {
         return {...state, cart: tempCart};
     }
     if (action.type === GET_TOTALS) {
-        let { total, amount } = state.cart.reduce((cartTotal, cartItem) => {
+        let { total, amount, tax, actualTotal } = state.cart.reduce((cartTotal, cartItem) => {
             const { price, amount } = cartItem;
             const itemTotal = price * amount;
-            cartTotal.total += itemTotal
-            cartTotal.amount += amount 
+            const taxTotal = itemTotal * 0.1;
+            cartTotal.total += itemTotal;
+            cartTotal.amount += amount;
+            cartTotal.tax += taxTotal;
             return cartTotal
-        }, { total: 0, amount: 0});
-        total = parseFloat(total.toFixed(2))
-        return { ...state, total, amount}
+        }, { total: 0, amount: 0, tax: 0});
+        total = parseFloat(total.toFixed(2));
+        tax = parseFloat(tax.toFixed(2));
+        actualTotal = tax + total;
+        actualTotal = parseFloat(actualTotal.toFixed(2));
+        return { ...state, total, amount, tax, actualTotal}
     } 
     return state;
   }
