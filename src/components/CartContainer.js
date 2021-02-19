@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 //note that connect and provider are the two things from react-redux here 
 import { CLEAR_CART, GET_TOTALS } from '../actions';
 
-const CartContainer = ({ cart = [], total, dispatch }) => {
+const CartContainer = ({ cart = [], total, tax, actualTotal, dispatch }) => {
   React.useEffect(() => {
     dispatch({ type: GET_TOTALS})
   })
@@ -36,7 +36,13 @@ const CartContainer = ({ cart = [], total, dispatch }) => {
         <hr />
         <div className="cart-total">
           <h4>
-            total <span>${total}</span>
+            Subtotal <span>${total}</span>
+          </h4>
+          <h4>
+            tax <span>${tax}</span>
+          </h4>
+          <h4>
+            total <span>${actualTotal}</span>
           </h4>
         </div>
         <button className="btn clear-btn" onClick={() => dispatch({ type: CLEAR_CART })}>clear cart</button>
@@ -46,7 +52,7 @@ const CartContainer = ({ cart = [], total, dispatch }) => {
 };
 
 const mapStateToProps = (state) => {
-  const { cart, total } = state;
-  return { cart, total }
+  const { cart, total, tax, actualTotal } = state;
+  return { cart, total, tax, actualTotal }
 }
 export default connect(mapStateToProps)(CartContainer);
