@@ -1,4 +1,4 @@
-import { CLEAR_CART, REMOVE, DECREASE, INCREASE } from "./actions";
+import { CLEAR_CART, REMOVE, DECREASE, INCREASE, GET_TOTALS } from "./actions";
 
 function reducer(state, action) {
     if ( action.type === CLEAR_CART) {
@@ -30,6 +30,17 @@ function reducer(state, action) {
         }
         return {...state, cart: tempCart};
     }
+    if (action.type === GET_TOTALS) {
+        let { total, amount } = state.cart.reduce((cartTotal, cartItem) => {
+            const { price, amount } = cartItem;
+            const itemTotal = price * amount;
+            cartTotal.total += itemTotal
+            cartTotal.amount += amount 
+            return cartTotal
+        }, { total: 0, amount: 0});
+        total = parseFloat(total.toFixed(2))
+        return { ...state, total, amount}
+    } 
     return state;
   }
 
